@@ -28,7 +28,7 @@ jobs:
         with:
           name: frontend-sast-reports
           path: |
-            ./frontend/npm-audit-report.json
+            ./npm-audit-report.json
 
       - name: Set up Docker image tag
         id: vars
