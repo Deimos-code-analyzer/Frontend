@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "/api"; // Change if backend is hosted elsewhere
+const API_URL = "/api"; //Change if backend is hosted elsewhere
 
 function App() {
   const [notes, setNotes] = useState([]);
