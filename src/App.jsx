@@ -97,7 +97,7 @@ ${text}
 
   return (
     <div className="container">
-      <h1 className="title">📒 Code Analyzer</h1>
+      <h1 className="title">🍀 Code Analyzer</h1>
 
       {/* Note Form with Analysis */}
       <form onSubmit={handleSubmit} className="note-form">
