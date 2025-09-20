@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 const API_URL = "/api"; //Change if backend is hosted elsewhere
 
@@ -95,11 +96,11 @@ ${text}
   };
 
   return (
-    <div style={{ maxWidth: "700px", margin: "auto", padding: "1rem" }}>
-      <h1>📒 Notes App + Claude Sonnet Analyzer</h1>
+    <div className="container">
+      <h1 className="title">📒 Code Analyzer</h1>
 
       {/* Note Form with Analysis */}
-      <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
+      <form onSubmit={handleSubmit} className="note-form">
         {!editingNote && (
           <input
             type="text"
@@ -107,7 +108,6 @@ ${text}
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            style={{ width: "100%", marginBottom: "0.5rem" }}
           />
         )}
         <textarea
@@ -115,40 +115,35 @@ ${text}
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
-          style={{ width: "100%", height: "120px", marginBottom: "0.5rem" }}
         />
 
-        <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
-          <button type="button" onClick={() => handleInvokeSonnet(content)}>
+        <div className="analysis-actions">
+          <button
+            type="button"
+            onClick={() => handleInvokeSonnet(content)}
+            className="btn btn-secondary"
+          >
             Analyze
           </button>
           <button
             type="button"
             onClick={handleReloadAnalysis}
             disabled={!lastAnalyzedText}
+            className="btn btn-secondary"
           >
             🔄 Reload Analysis
           </button>
         </div>
 
         {analysisResult && (
-          <div
-            style={{
-              marginTop: "0.5rem",
-              padding: "0.75rem",
-              background: "#f9f9f9",
-              border: "1px solid #ddd",
-              borderRadius: "5px",
-              whiteSpace: "pre-wrap"
-            }}
-          >
+          <div className="analysis-result">
             <strong>Analysis:</strong>
             <p>{analysisResult}</p>
           </div>
         )}
 
-        <div style={{ marginTop: "0.5rem" }}>
-          <button type="submit">
+        <div className="form-actions">
+          <button type="submit" className="btn btn-primary">
             {editingNote ? "Update Note" : "Add Note"}
           </button>
           {editingNote && (
@@ -159,7 +154,7 @@ ${text}
                 setName("");
                 setContent("");
               }}
-              style={{ marginLeft: "0.5rem" }}
+              className="btn btn-cancel"
             >
               Cancel
             </button>
@@ -168,25 +163,25 @@ ${text}
       </form>
 
       {/* Notes List */}
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <ul className="notes-list">
         {notes.map((note) => (
-          <li
-            key={note.name}
-            style={{
-              border: "1px solid #ccc",
-              padding: "0.5rem",
-              marginBottom: "0.5rem",
-            }}
-          >
+          <li key={note.name} className="note-item">
             <h3>{note.name}</h3>
             <p>{note.content}</p>
-            <button onClick={() => handleEdit(note)}>Edit</button>
-            <button
-              onClick={() => handleDelete(note.name)}
-              style={{ marginLeft: "0.5rem" }}
-            >
-              Delete
-            </button>
+            <div className="note-actions">
+              <button
+                onClick={() => handleEdit(note)}
+                className="btn btn-secondary"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(note.name)}
+                className="btn btn-danger"
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
