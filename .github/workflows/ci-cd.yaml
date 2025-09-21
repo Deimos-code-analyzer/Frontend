@@ -37,6 +37,13 @@ jobs:
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/code-analyzer-frontend:${{ env.TAG }} .
 
+      # - name: Run DAST (OWASP ZAP) against local frontend container
+      #   run: |
+      #     docker run -d -p 3000:3000 --name test-frontend ${{ secrets.DOCKERHUB_USERNAME }}/code-analyzer-frontend:${{ env.TAG }}
+      #     sleep 10
+      #     docker run --rm owasp/zap2docker-stable zap-baseline.py -t http://host.docker.internal:3000 -r zap-frontend-report.html
+      #     docker stop test-frontend && docker rm test-frontend
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
